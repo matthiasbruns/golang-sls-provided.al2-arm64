@@ -1,0 +1,30 @@
+service: golang-go1x
+
+frameworkVersion: "3"
+configValidationMode: error
+
+provider:
+  name: aws
+  runtime: go1.x
+  architecture: x86_64
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'eu-central-1'}
+  httpApi:
+    cors: true
+    name: ${self:service}-${self:provider.stage}
+
+functions:
+  hello:
+    name: hello
+    handler: build/lambda/hello
+    events:
+      - httpApi:
+          path: /hello
+          method: get
+  world:
+    name: hello
+    handler: build/lambda/world
+    events:
+      - httpApi:
+          path: /world
+          method: get
