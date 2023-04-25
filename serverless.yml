@@ -13,17 +13,24 @@ provider:
     cors: true
     name: ${self:service}-${self:provider.stage}
 
+package:
+  individually: true # <- package each function individually, to prevent file name conflicts
+
 functions:
   hello:
-    name: hello
-    handler: build/lambda/hello
+    name: hello-arm64
+    handler: bootstrap # <- the handler name must be bootstrap and in the root of the zip
+    package:
+      artifact: build/lambda/hello.zip # override the default artifact handling to use the built zip
     events:
       - httpApi:
           path: /arm64/hello
           method: get
   world:
-    name: world
-    handler: build/lambda/world
+    name: world-arm64
+    handler: bootstrap # <- the handler name must be bootstrap and in the root of the zip
+    package:
+      artifact: build/lambda/world.zip # override the default artifact handling to use the built zip
     events:
       - httpApi:
           path: /arm64/world
