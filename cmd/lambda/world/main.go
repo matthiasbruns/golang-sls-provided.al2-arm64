@@ -1,3 +1,5 @@
+// cmd/lambda/world/main.go
+
 package main
 
 import (

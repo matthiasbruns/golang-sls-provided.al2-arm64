@@ -22,7 +22,7 @@ functions:
           path: /hello
           method: get
   world:
-    name: hello
+    name: world
     handler: build/lambda/world
     events:
       - httpApi:
