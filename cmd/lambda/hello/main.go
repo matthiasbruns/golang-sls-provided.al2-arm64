@@ -1,3 +1,5 @@
+// cmd/lambda/hello/main.go
+
 package main
 
 import (
