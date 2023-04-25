@@ -1,30 +1,37 @@
-service: golang-go1x
+service: golang-provided-al2-arm64
 
 frameworkVersion: "3"
 configValidationMode: error
 
 provider:
   name: aws
-  runtime: go1.x
-  architecture: x86_64
+  runtime: provided.al2 # <- change from go1.x to provided.al2
+  architecture: arm64   # <- change from x86_64 to arm64
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'eu-central-1'}
   httpApi:
     cors: true
     name: ${self:service}-${self:provider.stage}
 
+package:
+  individually: true # <- package each function individually, to prevent file name conflicts
+
 functions:
   hello:
-    name: hello
-    handler: build/lambda/hello
+    name: hello-arm64
+    handler: bootstrap # <- the handler name must be bootstrap and in the root of the zip
+    package:
+      artifact: build/lambda/hello.zip # override the default artifact handling to use the built zip
     events:
       - httpApi:
-          path: /hello
+          path: /arm64/hello
           method: get
   world:
-    name: world
-    handler: build/lambda/world
+    name: world-arm64
+    handler: bootstrap # <- the handler name must be bootstrap and in the root of the zip
+    package:
+      artifact: build/lambda/world.zip # override the default artifact handling to use the built zip
     events:
       - httpApi:
-          path: /world
+          path: /arm64/world
           method: get
