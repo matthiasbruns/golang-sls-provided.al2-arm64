@@ -1,4 +1,4 @@
-service: golang-go1x
+service: golang-provided-al2-arm64
 
 frameworkVersion: "3"
 configValidationMode: error
@@ -19,12 +19,12 @@ functions:
     handler: build/lambda/hello
     events:
       - httpApi:
-          path: /hello
+          path: /arm64/hello
           method: get
   world:
     name: world
     handler: build/lambda/world
     events:
       - httpApi:
-          path: /world
+          path: /arm64/world
           method: get
