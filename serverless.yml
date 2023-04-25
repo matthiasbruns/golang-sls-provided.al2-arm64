@@ -1,4 +1,4 @@
-service: golang-go1x
+service: golang-go1x-x86
 
 frameworkVersion: "3"
 configValidationMode: error
@@ -19,12 +19,12 @@ functions:
     handler: build/lambda/hello
     events:
       - httpApi:
-          path: /hello
+          path: /x86/hello
           method: get
   world:
     name: world
     handler: build/lambda/world
     events:
       - httpApi:
-          path: /world
+          path: /x86/world
           method: get
