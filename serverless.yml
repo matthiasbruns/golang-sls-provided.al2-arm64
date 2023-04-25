@@ -5,8 +5,8 @@ configValidationMode: error
 
 provider:
   name: aws
-  runtime: go1.x
-  architecture: x86_64
+  runtime: provided.al2 # <- change from go1.x to provided.al2
+  architecture: arm64   # <- change from x86_64 to arm64
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'eu-central-1'}
   httpApi:
